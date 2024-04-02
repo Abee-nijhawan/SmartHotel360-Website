@@ -21,6 +21,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -40,3 +41,10 @@ steps:
     downloadType: 'single'
     artifactName: 'Hotel_artifact'
     downloadPath: '$(System.ArtifactsDirectory)'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'My_connection'
+    appType: 'webApp'
+    WebAppName: 'Hotelabee2'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
